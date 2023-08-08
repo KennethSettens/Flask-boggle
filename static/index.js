@@ -1,13 +1,13 @@
 $('#boggle-word').submit(function(event) {
    event.preventDefault();
-   const formData = $(this).serialize();
+   const guessedWord = $('#guess-input').val();
 
    $.ajax({
       type: 'POST',
       url: '/submit',
-      data: formData,
+      data: { input: guessedWord },
       success: function(response) {
-          
+         console.log("you guessed ", guessedWord)
       }
       // error: function(error) {
       //     console.error('Error submitting form:', error);
