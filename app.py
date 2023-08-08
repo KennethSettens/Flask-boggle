@@ -17,6 +17,6 @@ def start():
 def submit_answer():
    board = request.form.get("gameBoard")
    word  = request.form.get("input")
-   abc = boggle_game.check_valid_word(board, word)
+   res = boggle_game.check_valid_word(board, word)
 
-   return abc
+   return jsonify({'result': res})
