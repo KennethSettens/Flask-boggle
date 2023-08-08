@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-<h1>Play Boggle</h1>
 
-<tbody class="boggle-board">
 {% block content %}
+<h1>Play Boggle</h1>
+<table>
+<tbody class="boggle-board">
 
    {% for arr in gameBoard %}
       <tr>
@@ -11,5 +12,14 @@
          {% endfor%}
       </tr>
    {% endfor %}
-{% endblock%}
+
 </tbody>
+</table>
+
+<form action="/submit" method="post">
+   <input type="hidden" name="gameBoard" value="{{ gameBoard }}">
+   <input type="text", name="input">
+   <button type="submit">Submit</button>
+</form>
+
+{% endblock%}

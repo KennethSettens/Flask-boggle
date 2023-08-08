@@ -1,5 +1,5 @@
 from boggle import Boggle
-from flask import Flask, render_template, session
+from flask import Flask, jsonify, render_template, request, session
 
 app = Flask(__name__)
 boggle_game = Boggle()
@@ -11,3 +11,12 @@ def start():
    gameBoard = boggle_game.make_board()
    session['gameBoard'] = gameBoard
    return render_template("board.html", gameBoard=gameBoard)
+
+
+@app.route("/submit")
+def submit_answer():
+   board = request.form.get("gameBoard")
+   word  = request.form.get("input")
+   res = boggle_game.check_valid_word(board, word)
+
+   return jsonify({'result': res})
