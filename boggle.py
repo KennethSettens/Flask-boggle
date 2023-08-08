@@ -40,7 +40,7 @@ class Boggle():
 
     def find_from(self, board, word, y, x, seen):
         """Can we find a word on board, starting at x, y?"""
-
+        print("board")
         if x > 4 or y > 4:
             return
         if board[y][x] != word[0]:

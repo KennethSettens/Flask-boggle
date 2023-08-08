@@ -13,10 +13,10 @@ def start():
    return render_template("board.html", gameBoard=gameBoard)
 
 
-@app.route("/submit")
+@app.route("/submit", methods=["POST"])
 def submit_answer():
    board = request.form.get("gameBoard")
    word  = request.form.get("input")
-   res = boggle_game.check_valid_word(board, word)
+   abc = boggle_game.check_valid_word(board, word)
 
-   return jsonify({'result': res})
+   return abc
