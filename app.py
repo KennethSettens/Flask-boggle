@@ -4,7 +4,6 @@ from flask import Flask, jsonify, render_template, request, session
 app = Flask(__name__)
 boggle_game = Boggle()
 app.secret_key = 'your_secret_key_here'
-session['highscore'] = 0
 
 @app.route('/')
 def start():
@@ -25,6 +24,9 @@ def submit_answer():
 def update():
    data = request.json  
    score = data.get("score")
+
+   if 'highscore' not in session:
+      session['highscore'] = 0
 
    if (score > session['highscore']):
       session['highscore'] = score

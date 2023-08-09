@@ -28,7 +28,7 @@ $('#boggle-word').submit(function(event) {
 })
 
 function start60SecondTimer(callback) {
-   let secs = 60;
+   let secs = 30;
 
    function showTimer() {
        $(".time").text(secs);
@@ -50,13 +50,14 @@ function start60SecondTimer(callback) {
 function onTimerEnd() {
    $("#boggle-word").hide();
    alert("Time's up! Game over.");
-   
+   updateHighscore()
 }
 
 function updateHighscore(){
    $.ajax({
       type: 'POST',
-      url: '/submit',
+      url: '/update-highscore',
+      contentType: 'application/json',
       data: JSON.stringify({ score: score}),
       success: function(response) {
          console.log("high score data sent to server")
