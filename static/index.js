@@ -7,11 +7,9 @@ $('#boggle-word').submit(function(event) {
       url: '/submit',
       data: { input: guessedWord },
       success: function(response) {
-         console.log("you guessed ", guessedWord)
+         $("#boardMessage").text(response.data);
       }
-      // error: function(error) {
-      //     console.error('Error submitting form:', error);
-      // }
+      
   });
 })
 

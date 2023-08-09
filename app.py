@@ -15,7 +15,7 @@ def start():
 
 @app.route("/submit", methods=["POST"])
 def submit_answer():
-   board = request.form.get("gameBoard")
+   board = session['gameBoard']
    word  = request.form.get("input")
    res = boggle_game.check_valid_word(board, word)
 
