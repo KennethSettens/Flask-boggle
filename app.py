@@ -31,4 +31,6 @@ def update():
    if (score > session['highscore']):
       session['highscore'] = score
       print("new high score updated")
+   score = session['highscore']
+   return jsonify(score = score)
    

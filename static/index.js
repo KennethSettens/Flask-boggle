@@ -60,7 +60,8 @@ function updateHighscore(){
       contentType: 'application/json',
       data: JSON.stringify({ score: score}),
       success: function(response) {
-         console.log("high score data sent to server")
+         $("highscore")
+         console.log(response.score)
       },
       error: function(xhr, status, error) {
          console.error("Error:", error);
