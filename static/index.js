@@ -1,16 +1,68 @@
+let score = 0;
+
+$(document).ready(function () {
+   start60SecondTimer(onTimerEnd);
+})
+
 $('#boggle-word').submit(function(event) {
    event.preventDefault();
    const guessedWord = $('#guess-input').val();
 
+  
+   
    $.ajax({
       type: 'POST',
       url: '/submit',
       data: { input: guessedWord },
       success: function(response) {
-         $("#boardMessage").text(response.data);
+         let result = response.result
+         $("#boardMessage").text(result);
+
+         if (result === "ok"){
+            score += response.word.length;
+            $("#score").text(score);
+         }
       }
       
   });
 })
 
+function start60SecondTimer(callback) {
+   let secs = 60;
 
+   function showTimer() {
+       $(".time").text(secs);
+   }
+
+   function tick() {
+       secs -= 1;
+       showTimer();
+
+       if (secs === 0) {
+           clearInterval(timerInterval);
+           callback();
+       }
+   }
+   showTimer();
+   const timerInterval = setInterval(tick, 1000);
+}
+
+function onTimerEnd() {
+   $("#boggle-word").hide();
+   alert("Time's up! Game over.");
+   
+}
+
+function updateHighscore(){
+   $.ajax({
+      type: 'POST',
+      url: '/submit',
+      data: JSON.stringify({ score: score}),
+      success: function(response) {
+         console.log("high score data sent to server")
+      },
+      error: function(xhr, status, error) {
+         console.error("Error:", error);
+      }
+  });
+}

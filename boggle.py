@@ -29,7 +29,9 @@ class Boggle():
         word_exists = word in self.words
         valid_word = self.find(board, word.upper())
 
-        if word_exists and valid_word:
+        if len(word) < 2:
+            result = "too short"
+        elif word_exists and valid_word:
             result = "ok"
         elif word_exists and not valid_word:
             result = "not-on-board"
